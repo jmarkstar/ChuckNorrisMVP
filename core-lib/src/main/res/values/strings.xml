@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">core-lib</string>
+
+    <string name="exception_api_unauthorized">Ups! Access is denied due to invalid credentials.</string>
+
+    <string name="exception_get_jokes">Ups! Error occurred while fetching data.</string>
+
 </resources>

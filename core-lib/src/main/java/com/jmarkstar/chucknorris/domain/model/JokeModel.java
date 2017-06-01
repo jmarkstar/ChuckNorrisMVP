@@ -1,15 +1,16 @@
 package com.jmarkstar.chucknorris.domain.model;
 
-import java.util.ArrayList;
-
 /**
  * Created by jmarkstar on 31/05/2017.
  */
 public class JokeModel {
 
+    public static final String TABLE_NAME = "joke_table";
+    public static final String ID_FIELD = "_id";
+    public static final String JOKE_FIELD = "joke";
+
     private Integer id;
     private String joke;
-    private ArrayList<String> categories;
 
     public Integer getId() {
         return id;
@@ -27,11 +28,4 @@ public class JokeModel {
         this.joke = joke;
     }
 
-    public ArrayList<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
 }

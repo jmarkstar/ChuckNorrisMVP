@@ -5,5 +5,5 @@ package com.jmarkstar.chucknorris.base;
  */
 public interface InteractorCallBack {
     void onSuccess(Object object);
-    void onError(Object object);
+    void onError(Throwable ex);
 }

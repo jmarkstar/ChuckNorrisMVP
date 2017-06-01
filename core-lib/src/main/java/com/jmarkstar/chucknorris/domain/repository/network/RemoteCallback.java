@@ -1,5 +1,6 @@
 package com.jmarkstar.chucknorris.domain.repository.network;
 
+import com.jmarkstar.chucknorris.exception.UnAuthorizedApiException;
 import java.net.HttpURLConnection;
 import javax.net.ssl.HttpsURLConnection;
 import retrofit2.Call;
@@ -20,7 +21,7 @@ public abstract class RemoteCallback<T> implements Callback<T> {
                 break;
 
             case HttpURLConnection.HTTP_UNAUTHORIZED:
-                onUnauthorized();
+                onFailed(new UnAuthorizedApiException());
                 break;
 
             default:
@@ -33,8 +34,6 @@ public abstract class RemoteCallback<T> implements Callback<T> {
     }
 
     public abstract void onSuccess(T response);
-
-    public abstract void onUnauthorized();
 
     public abstract void onFailed(Throwable throwable);
 }

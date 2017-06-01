@@ -32,8 +32,21 @@ ext {
     materialDialogVersion = "0.9.3.0"
     customCalendarViewVersion = "v1.1"
 
+    //json
     gsonVersion = "2.8.1"
     moshiVersion = "1.5.0"
+
+    //Testing
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    powermockVersion = '1.6.4'
+
+    testing = [
+            junit   : "junit:junit:${junitVersion}",
+            mockito : "org.mockito:mockito-core:$mockitoVersion",
+            powermockJunit: "org.powermock:powermock-module-junit4:$powermockVersion",
+            powermockMockito: "org.powermock:powermock-api-mockito:$powermockVersion"
+    ]
 
     libraries = [
             androidSupport   : "com.android.support:support-v4:${androidSupportVersion}",

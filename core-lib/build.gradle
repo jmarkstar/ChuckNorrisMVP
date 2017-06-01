@@ -32,5 +32,8 @@ dependencies {
     compile rootProject.ext.libraries.androidAnnotations
     compile rootProject.ext.libraries.okhttpLogging
 
-    testCompile 'junit:junit:4.12'
+    testCompile rootProject.ext.testing.junit
+    testCompile rootProject.ext.testing.mockito
+    testCompile rootProject.ext.testing.powermockJunit
+    testCompile rootProject.ext.testing.powermockMockito
 }
