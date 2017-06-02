@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.jmarkstar.chucknorris.ui.joke.MainActivity">
 
-    <TextView
+    <TextView android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"

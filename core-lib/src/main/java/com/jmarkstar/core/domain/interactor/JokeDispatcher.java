@@ -7,10 +7,6 @@ import java.util.ArrayList;
  * Created by jmarkstar on 2/06/2017.
  */
 public interface JokeDispatcher {
-    interface Callback<R> {
-        void onJokeActionSuccess(R response);
-        void onJokeActionError(Throwable ex);
-    }
 
-    void fetchJokesInteractor(boolean refresh, int count, Callback<ArrayList<JokeModel>> callback);
+    void fetchJokesInteractor(boolean refresh, int count, Interactor.Callback<ArrayList<JokeModel>> callback);
 }

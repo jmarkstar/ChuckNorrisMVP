@@ -1,5 +1,6 @@
 package com.jmarkstar.core.presenter.jokes;
 
+import com.jmarkstar.core.domain.interactor.Interactor;
 import com.jmarkstar.core.domain.interactor.JokeDispatcher;
 import com.jmarkstar.core.domain.model.JokeModel;
 import com.jmarkstar.core.presenter.BaseContractor;
@@ -17,13 +18,13 @@ public class JokePresenter extends BaseContractor.BasePresenter<JokeContract.Jok
     @Inject public JokePresenter(){}
 
     @Override public void onGetRandomJokes(Integer count) {
-        mJokeDispatcher.fetchJokesInteractor(true, 10, new JokeDispatcher.Callback() {
+        mJokeDispatcher.fetchJokesInteractor(true, 10, new Interactor.Callback<ArrayList<JokeModel>>() {
 
-            @Override public void onJokeActionSuccess(Object response) {
-                mView.showJokes((ArrayList<JokeModel>)response);
+            @Override public void onSuccess(ArrayList<JokeModel> response) {
+                mView.showJokes(response);
             }
 
-            @Override public void onJokeActionError(Throwable ex) {
+            @Override public void onError(Throwable ex) {
 
             }
         });

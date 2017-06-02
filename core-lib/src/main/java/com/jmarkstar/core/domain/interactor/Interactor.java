@@ -11,5 +11,10 @@ package com.jmarkstar.core.domain.interactor;
  */
 public interface Interactor {
 
+  interface Callback<R> {
+    void onSuccess(R response);
+    void onError(Throwable ex);
+  }
+
   void run();
 }

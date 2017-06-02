@@ -3,6 +3,7 @@ package com.jmarkstar.chucknorris.ui.joke;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.jmarkstar.chucknorris.R;
 import com.jmarkstar.chucknorris.ChuckNorrisApplication;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity implements JokeContract.Joke
 
     @Inject JokeContract.JokePresenter mJokePresenter;
 
+    private TextView mTvCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements JokeContract.Joke
             .jokeModule(new JokeModule(this))
             .build()
             .inject(this);
+
+        mTvCount = (TextView)findViewById(R.id.tv_count);
 
         mJokePresenter.onGetRandomJokes(10);
     }
@@ -64,5 +69,6 @@ public class MainActivity extends AppCompatActivity implements JokeContract.Joke
     @Override
     public void showJokes(ArrayList<JokeModel> jokes) {
         Log.v("MainActivity", "jokes size = "+jokes.size());
+        mTvCount.setText("Jokes size = "+jokes.size());
     }
 }
