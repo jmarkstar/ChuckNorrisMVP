@@ -1,6 +1,6 @@
-package com.jmarkstar.chucknorris.domain.repository.network;
+package com.jmarkstar.core.domain.repository.network;
 
-import com.jmarkstar.chucknorris.BuildConfig;
+import com.jmarkstar.core.BuildConfig;
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

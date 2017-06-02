@@ -1,14 +1,14 @@
-package com.jmarkstar.chucknorris.domain.repository.database;
+package com.jmarkstar.core.domain.repository.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.jmarkstar.chucknorris.domain.model.JokeModel;
+import com.jmarkstar.core.domain.model.JokeModel;
 
 /**
  * Created by jmarkstar on 31/05/2017.
  */
-public class ChuckNorriesDataBaseHelper extends SQLiteOpenHelper {
+public class ChuckNorrisDataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "chucknorriesjokes.db";
     private static final Integer DATABASE_VERSION = 1;
@@ -21,7 +21,7 @@ public class ChuckNorriesDataBaseHelper extends SQLiteOpenHelper {
     private StringBuilder SQL_DROP_TABLE_JOKE = new StringBuilder()
             .append("DROP TABLE IF EXISTS "+JokeModel.TABLE_NAME);
 
-    public ChuckNorriesDataBaseHelper(Context context) {
+    public ChuckNorrisDataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

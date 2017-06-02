@@ -20,9 +20,15 @@ public class GetJokesInteractor {
 
     private static final String TAG = "GetJokesInteractor";
 
-    @Inject JokeDao jokeDao;
-    @Inject Context mContext;
-    @Inject IcndbService mIcndbService;
+    private JokeDao jokeDao;
+    private Context mContext;
+    private IcndbService mIcndbService;
+
+     @Inject public GetJokesInteractor(JokeDao jokeDao, Context mContext, IcndbService mIcndbService) {
+        this.jokeDao = jokeDao;
+        this.mContext = mContext;
+        this.mIcndbService = mIcndbService;
+    }
 
     public void getJokes(boolean refresh, Integer count, final InteractorCallBack<ArrayList<JokeModel>> interactorCallBack ){
         if(refresh){
@@ -35,7 +41,8 @@ public class GetJokesInteractor {
     private void getJokesFromServer(Integer count, final InteractorCallBack<ArrayList<JokeModel>> interactorCallBack){
         Call<JokeResponse<ArrayList<JokeModel>>> responseCall = mIcndbService.getJokes(count);
         responseCall.enqueue(new RemoteCallback<JokeResponse<ArrayList<JokeModel>>>() {
-            @Override public void onSuccess(JokeResponse<ArrayList<JokeModel>> response) {
+            @Override
+            public void onSuccess(JokeResponse<ArrayList<JokeModel>> response) {
                 if(response.getType().equals(Constants.API_SUCCESS)){
                     interactorCallBack.onSuccess(response.getValue());
                 }else{
@@ -43,8 +50,9 @@ public class GetJokesInteractor {
                 }
             }
 
-            @Override public void onFailed(Throwable throwable) {
-                interactorCallBack.onError(throwable);
+            @Override
+            public void onFailed(Throwable throwable) {
+                interactorCallBack.onError(new ApiException(mContext.getString(R.string.exception_get_jokes)));
             }
         });
     }

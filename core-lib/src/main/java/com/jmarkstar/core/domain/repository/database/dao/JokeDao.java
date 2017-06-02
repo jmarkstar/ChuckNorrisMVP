@@ -15,9 +15,6 @@ import java.util.ArrayList;
  */
 public class JokeDao {
 
-
-
-
     private String [] ALL_COLUMNS = {JokeModel.ID_FIELD, JokeModel.JOKE_FIELD};
 
     private Context mContext;

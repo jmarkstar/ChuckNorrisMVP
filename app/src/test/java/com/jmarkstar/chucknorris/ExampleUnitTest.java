@@ -1,4 +1,4 @@
-package com.jmarkstar.chucknorris;
+package com.jmarkstar.core;
 
 import org.junit.Test;
 

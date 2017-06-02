@@ -1,4 +1,4 @@
-package com.jmarkstar.chucknorris.base;
+package com.jmarkstar.core.presenter;
 
 import android.support.annotation.NonNull;
 
@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 
 public abstract class BaseContractor {
 
-    public interface RemoteView {
+    public interface BaseView {
         void showProgress();
         void hideProgress();
         void showUnauthorizedError();
