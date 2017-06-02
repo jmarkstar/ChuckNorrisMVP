@@ -27,8 +27,8 @@ public final class DatabaseModule {
 
     @Singleton
     @Provides
-    JokeDao provideJokeDao(Context context, SQLiteDatabase sqLiteDatabase){
-        return new JokeDao(context, sqLiteDatabase);
+    JokeDao provideJokeDao(SQLiteDatabase sqLiteDatabase){
+        return new JokeDao(sqLiteDatabase);
     }
 
 }

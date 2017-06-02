@@ -1,7 +1,6 @@
 package com.jmarkstar.core.domain.repository.database.dao;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.jmarkstar.core.domain.model.JokeModel;
@@ -14,11 +13,9 @@ public class JokeDao {
 
     private String [] ALL_COLUMNS = {JokeModel.ID_FIELD, JokeModel.JOKE_FIELD};
 
-    private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
 
-    public JokeDao(Context context, SQLiteDatabase sqLiteDatabase){
-        this.mContext = context;
+    public JokeDao(SQLiteDatabase sqLiteDatabase){
         this.mSQLiteDatabase = sqLiteDatabase;
     }
 

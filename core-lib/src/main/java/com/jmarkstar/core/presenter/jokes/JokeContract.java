@@ -2,7 +2,6 @@ package com.jmarkstar.core.presenter.jokes;
 
 import com.jmarkstar.core.presenter.BaseContractor;
 import com.jmarkstar.core.domain.model.JokeModel;
-
 import java.util.ArrayList;
 
 /**
