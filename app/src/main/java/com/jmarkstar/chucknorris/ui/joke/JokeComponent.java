@@ -12,5 +12,5 @@ import dagger.Component;
 @ActivityScope
 @Component(modules = {JokeModule.class}, dependencies = {ApplicationComponent.class})
 public interface JokeComponent {
-    void inject(MainActivity activity);
+    void inject(JokesActivity activity);
 }

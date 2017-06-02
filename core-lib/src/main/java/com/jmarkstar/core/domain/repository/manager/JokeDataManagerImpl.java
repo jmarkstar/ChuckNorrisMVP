@@ -3,7 +3,6 @@ package com.jmarkstar.core.domain.repository.manager;
 import android.util.Log;
 import com.jmarkstar.core.R;
 import com.jmarkstar.core.domain.interactor.Interactor;
-import com.jmarkstar.core.domain.interactor.executor.MainThread;
 import com.jmarkstar.core.domain.model.JokeModel;
 import com.jmarkstar.core.domain.repository.database.dao.JokeDao;
 import com.jmarkstar.core.domain.repository.network.IcndbService;
@@ -19,11 +18,10 @@ import retrofit2.Call;
 /**
  * Created by jmarkstar on 2/06/2017.
  */
-public class JokeDataManagerImpl implements JokeDataManager {
+public class JokeDataManagerImpl extends BaseDataManager implements JokeDataManager {
 
     private static final String TAG = "JokeDataManager";
 
-    @Inject MainThread mMainThread;
     @Inject IcndbService mIcndbService;
     @Inject JokeDao mJokeDao;
 
@@ -74,22 +72,6 @@ public class JokeDataManagerImpl implements JokeDataManager {
             }
 
             @Override public void onFailed(Throwable throwable) {
-                callback.onError(throwable);
-            }
-        });
-    }
-
-    private void notifySuccess(final Object response, final Interactor.Callback callback) {
-        mMainThread.post(new Runnable() {
-            @Override public void run() {
-                callback.onSuccess(response);
-            }
-        });
-    }
-
-    private void notifyError(final Throwable throwable, final Interactor.Callback callback) {
-        mMainThread.post(new Runnable() {
-            @Override public void run() {
                 callback.onError(throwable);
             }
         });
