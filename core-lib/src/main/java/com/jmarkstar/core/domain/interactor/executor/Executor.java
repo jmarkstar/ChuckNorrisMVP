@@ -16,5 +16,5 @@ import com.jmarkstar.core.domain.interactor.Interactor;
  */
 public interface Executor {
 
-  void run(final Interactor interactor);
+  void execute(final Interactor interactorAction);
 }

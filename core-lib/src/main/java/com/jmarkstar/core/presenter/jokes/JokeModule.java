@@ -1,12 +1,9 @@
 package com.jmarkstar.core.presenter.jokes;
 
-import android.content.Context;
-
-import com.jmarkstar.core.domain.interactor.FetchJokesInteractor;
-import com.jmarkstar.core.domain.interactor.FetchJokesInteractorImpl;
-import com.jmarkstar.core.domain.repository.database.dao.JokeDao;
-import com.jmarkstar.core.domain.repository.network.IcndbService;
-
+import com.jmarkstar.core.domain.interactor.JokeDispatcher;
+import com.jmarkstar.core.domain.interactor.JokeDispatcherImpl;
+import com.jmarkstar.core.domain.repository.manager.JokeDataManager;
+import com.jmarkstar.core.domain.repository.manager.JokeDataManagerImpl;
 import dagger.Module;
 import dagger.Provides;
 
@@ -28,7 +25,12 @@ public class JokeModule {
     }
 
     @Provides
-    FetchJokesInteractor provideFetchJokesInteractor(FetchJokesInteractorImpl fetchJokesInteractor){
+    JokeDataManager provideJokeDataManager(JokeDataManagerImpl jokeDataManager){
+        return jokeDataManager;
+    }
+
+    @Provides
+    JokeDispatcher provideJokeDispatcher(JokeDispatcherImpl fetchJokesInteractor){
         return fetchJokesInteractor;
     }
 

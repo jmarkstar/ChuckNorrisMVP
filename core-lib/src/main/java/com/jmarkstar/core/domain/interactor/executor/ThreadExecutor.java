@@ -24,13 +24,12 @@ public class ThreadExecutor implements Executor {
   }
 
   @Override
-  public void run(final Interactor interactor) {
+  public void execute(final Interactor interactor) {
     if (null == interactor) {
       throw new IllegalArgumentException("Interactor to execute can't be null");
     }
     mThreadPoolExecutor.submit(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         interactor.run();
       }
     });
