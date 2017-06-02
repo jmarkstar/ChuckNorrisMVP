@@ -3,7 +3,6 @@ package com.jmarkstar.core.domain.repository.network.response;
 /**
  * Created by jmarkstar on 30/05/2017.
  */
-
 public class JokeResponse<T> {
 
     private String type;

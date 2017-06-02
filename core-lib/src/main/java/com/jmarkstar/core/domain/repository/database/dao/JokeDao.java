@@ -4,10 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.jmarkstar.core.R;
-import com.jmarkstar.core.domain.interactor.InteractorCallBack;
 import com.jmarkstar.core.domain.model.JokeModel;
-import com.jmarkstar.core.exception.LocalDatabaseException;
 import java.util.ArrayList;
 
 /**
@@ -32,22 +29,17 @@ public class JokeDao {
         return mSQLiteDatabase.insert(JokeModel.TABLE_NAME, null, contentValues);
     }
 
-    public void getJokes(Integer count, InteractorCallBack<ArrayList<JokeModel>> interactorCallBack){
-        try{
-            ArrayList<JokeModel> jokes = new ArrayList<>();
-            Cursor mCursor = mSQLiteDatabase.query(true, JokeModel.TABLE_NAME, ALL_COLUMNS, null, null, null, null, null, String.valueOf(count));
-            while (mCursor.moveToNext()){
-                JokeModel joke = new JokeModel();
-                joke.setId(mCursor.getInt(mCursor.getColumnIndex(JokeModel.ID_FIELD)));
-                joke.setJoke(mCursor.getString(mCursor.getColumnIndex(JokeModel.JOKE_FIELD)));
-                jokes.add(joke);
-            }
-            mCursor.close();
-            interactorCallBack.onSuccess(jokes);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            interactorCallBack.onError(new LocalDatabaseException(mContext.getString(R.string.exception_get_jokes)));
+    public ArrayList<JokeModel> getJokes(Integer count){
+        ArrayList<JokeModel> jokes = new ArrayList<>();
+        Cursor mCursor = mSQLiteDatabase.query(true, JokeModel.TABLE_NAME, ALL_COLUMNS, null, null, null, null, null, String.valueOf(count));
+        while (mCursor.moveToNext()){
+            JokeModel joke = new JokeModel();
+            joke.setId(mCursor.getInt(mCursor.getColumnIndex(JokeModel.ID_FIELD)));
+            joke.setJoke(mCursor.getString(mCursor.getColumnIndex(JokeModel.JOKE_FIELD)));
+            jokes.add(joke);
         }
+        mCursor.close();
+        return jokes;
     }
 
     public void closeDb(){

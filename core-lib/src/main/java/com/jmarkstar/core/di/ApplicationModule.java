@@ -23,5 +23,4 @@ public class ApplicationModule {
     Context provideContext(){
         return mApplication;
     }
-
 }

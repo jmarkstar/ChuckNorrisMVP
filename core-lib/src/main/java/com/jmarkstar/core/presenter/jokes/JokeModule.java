@@ -2,7 +2,8 @@ package com.jmarkstar.core.presenter.jokes;
 
 import android.content.Context;
 
-import com.jmarkstar.core.domain.interactor.GetJokesInteractor;
+import com.jmarkstar.core.domain.interactor.FetchJokesInteractor;
+import com.jmarkstar.core.domain.interactor.FetchJokesInteractorImpl;
 import com.jmarkstar.core.domain.repository.database.dao.JokeDao;
 import com.jmarkstar.core.domain.repository.network.IcndbService;
 
@@ -27,8 +28,8 @@ public class JokeModule {
     }
 
     @Provides
-    GetJokesInteractor provideGetJokesInteractor(JokeDao jokeDao, Context mContext, IcndbService mIcndbService){
-        return new GetJokesInteractor(jokeDao, mContext, mIcndbService);
+    FetchJokesInteractor provideFetchJokesInteractor(FetchJokesInteractorImpl fetchJokesInteractor){
+        return fetchJokesInteractor;
     }
 
     @Provides

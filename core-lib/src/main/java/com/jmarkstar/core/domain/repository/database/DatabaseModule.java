@@ -11,7 +11,7 @@ import dagger.Provides;
  * Created by jmarkstar on 1/06/2017.
  */
 @Module
-public class DatabaseModule {
+public final class DatabaseModule {
 
     @Singleton
     @Provides

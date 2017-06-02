@@ -3,6 +3,7 @@ package com.jmarkstar.core.domain.repository.network;
 import android.content.Context;
 import com.jmarkstar.core.BuildConfig;
 import com.jmarkstar.core.util.Constants;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Singleton;
 import dagger.Module;
@@ -17,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by jmarkstar on 1/06/2017.
  */
 @Module
-public class NetworkModule {
+public final class NetworkModule {
 
     private String mBaseUrl;
 
@@ -33,10 +34,12 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(GsonConverterFactory gsonConverterFactory, OkHttpClient okHttpClient) {
+    Retrofit provideRetrofit(GsonConverterFactory gsonConverterFactory, OkHttpClient okHttpClient,
+                             ThreadPoolExecutor threadPoolExecutor) {
         return new Retrofit.Builder()
             .addConverterFactory(gsonConverterFactory)
             .baseUrl(mBaseUrl)
+            .callbackExecutor(threadPoolExecutor)
             .client(okHttpClient)
             .build();
     }
