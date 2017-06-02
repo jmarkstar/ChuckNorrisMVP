@@ -1,4 +1,4 @@
-package com.jmarkstar.core;
+package com.jmarkstar.chucknorris;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

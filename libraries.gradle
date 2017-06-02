@@ -77,6 +77,7 @@ ext {
 
             butterknife      : "com.jakewharton:butterknife:${butterknifeVersion}",
             dagger           : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler:  "com.google.dagger:dagger-compiler:${daggerVersion}",
             javaxAnnotations : "javax.annotation:jsr250-api:${javaxAnnotationsVersion}",
 
 
