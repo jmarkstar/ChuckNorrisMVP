@@ -47,7 +47,8 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.VHJoke> {
     }
 
     @Override public int getItemCount() {
-        return jokes.size();
+        if(jokes==null)return 0;
+        else return jokes.size();
     }
 
     class VHJoke extends RecyclerView.ViewHolder {

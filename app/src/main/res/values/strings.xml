@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChuckNorris</string>
+    <string name="number_jokes_limit">I\'m sorry, We just have %d jokes.</string>
 </resources>

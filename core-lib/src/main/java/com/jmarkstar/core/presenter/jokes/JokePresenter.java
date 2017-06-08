@@ -18,14 +18,16 @@ public class JokePresenter extends BaseContractor.BasePresenter<JokeContract.Jok
     @Inject public JokePresenter(){}
 
     @Override public void onGetRandomJokes(Integer count) {
+        mView.showProgress();
         mJokeDispatcher.fetchJokesInteractor(true, count, new Action.Callback<ArrayList<JokeModel>>() {
 
             @Override public void onSuccess(ArrayList<JokeModel> response) {
+                mView.hideProgress();
                 mView.showJokes(response);
             }
 
             @Override public void onError(Throwable ex) {
-
+                errorHandler(ex);
             }
         });
     }
@@ -36,5 +38,18 @@ public class JokePresenter extends BaseContractor.BasePresenter<JokeContract.Jok
 
     @Override public void onGetSpecificJoke(Integer idJoke) {
 
+    }
+
+    @Override public void onGetNumberOfJokes() {
+        mView.showProgress();
+        mJokeDispatcher.fetchNumberOfJokes(new Action.Callback<Integer>() {
+            @Override public void onSuccess(Integer response) {
+                mView.getNumberOfJokes(response);
+            }
+
+            @Override public void onError(Throwable ex) {
+                errorHandler(ex);
+            }
+        });
     }
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface JokeDataManager {
 
     void getJokes(final boolean refresh, final int count, final Action.Callback<ArrayList<JokeModel>> callback);
+    void fetchNumberOfJokes(final Action.Callback<Integer> callback);
     void getJokesWithCustomName(Integer count, String firstName, String lastName, Action.Callback callback);
     void getJoke(Integer idJoke, Action.Callback<JokeModel> callback);
 }

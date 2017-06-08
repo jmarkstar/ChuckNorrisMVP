@@ -21,4 +21,6 @@ public interface IcndbService {
             @Query("lastName") String lastName);
 
     @GET("jokes/{idJoke}") Call<JokeResponse<JokeModel>> getJoke(@Path("idJoke") Integer idJoke);
+
+    @GET("/jokes/count") Call<JokeResponse<Integer>> fetchNumberOfJokes();
 }

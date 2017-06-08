@@ -12,11 +12,13 @@ public interface JokeContract {
 
     interface JokeView extends BaseContractor.BaseView {
         void showJokes(ArrayList<JokeModel> jokes);
+        void getNumberOfJokes(Integer numberOfJokes);
     }
 
     interface JokePresenter {
         void onGetRandomJokes(Integer count);
         void onGetRandomJokesWithCustomName(Integer count, String name, String lastName);
         void onGetSpecificJoke(Integer idJoke);
+        void onGetNumberOfJokes();
     }
 }
