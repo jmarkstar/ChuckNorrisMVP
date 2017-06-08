@@ -1,5 +1,6 @@
 package com.jmarkstar.chucknorris.ui.joke;
 
+import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +8,15 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.jmarkstar.chucknorris.R;
 import com.jmarkstar.chucknorris.ChuckNorrisApplication;
@@ -20,7 +27,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class JokesActivity extends AppCompatActivity implements JokeContract.JokeView {
 
@@ -45,6 +51,23 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
             .build()
             .inject(this);
 
+        mEtCount.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    mJokeAdapter.addList(null);
+                    if(numberOfJokes != null){
+                        getJokes();
+                    }else{
+                        mJokePresenter.onGetNumberOfJokes();
+                    }
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         mRvJokes.setLayoutManager( new LinearLayoutManager(this));
         mRvJokes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
@@ -52,13 +75,21 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
         mJokePresenter.onGetRandomJokes(10);
     }
 
-    @OnClick(R.id.btn_fetch) public void onFetch(){
-        mJokeAdapter.addList(null);
-        if(numberOfJokes != null){
-            getJokes();
-        }else{
-            mJokePresenter.onGetNumberOfJokes();
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_jokes_menu, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_put_name :
+
+                return true;
+            case R.id.action_random:
+
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override public void showProgress() {

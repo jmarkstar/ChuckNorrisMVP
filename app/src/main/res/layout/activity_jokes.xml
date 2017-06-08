@@ -14,15 +14,11 @@
 
         <EditText android:id="@+id/et_count"
             android:hint="Count"
+            android:maxLines="1"
+            android:inputType="number"
             android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
-        <Button android:id="@+id/btn_fetch"
-            android:text="Fetch"
-            android:layout_toRightOf="@+id/et_count"
-            android:layout_toEndOf="@+id/et_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"/>
 
     </RelativeLayout>
 
