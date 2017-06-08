@@ -1,6 +1,6 @@
 package com.jmarkstar.core.domain.repository.manager;
 
-import com.jmarkstar.core.domain.interactor.Interactor;
+import com.jmarkstar.core.domain.interactor.Action;
 import com.jmarkstar.core.domain.model.JokeModel;
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface JokeDataManager {
 
-    void getJokes(final boolean refresh, final int count, final Interactor.Callback<ArrayList<JokeModel>> callback);
-    void getJokesWithCustomName(Integer count, String firstName, String lastName, Interactor.Callback callback);
-    void getJoke(Integer idJoke, Interactor.Callback<JokeModel> callback);
+    void getJokes(final boolean refresh, final int count, final Action.Callback<ArrayList<JokeModel>> callback);
+    void getJokesWithCustomName(Integer count, String firstName, String lastName, Action.Callback callback);
+    void getJoke(Integer idJoke, Action.Callback<JokeModel> callback);
 }

@@ -1,7 +1,7 @@
 package com.jmarkstar.chucknorris.di;
 
 import android.content.Context;
-import com.jmarkstar.core.di.ApplicationModule;
+
 import com.jmarkstar.core.domain.interactor.executor.Executor;
 import com.jmarkstar.core.domain.interactor.executor.ExecutorModule;
 import com.jmarkstar.core.domain.interactor.executor.MainThread;

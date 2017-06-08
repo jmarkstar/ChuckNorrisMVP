@@ -9,10 +9,10 @@ package com.jmarkstar.core.domain.interactor;
  * <p>
  * Created by Octa
  */
-public interface Interactor {
+public interface Action {
 
-  interface Callback<R> {
-    void onSuccess(R response);
+  interface Callback<Model> {
+    void onSuccess(Model response);
     void onError(Throwable ex);
   }
 

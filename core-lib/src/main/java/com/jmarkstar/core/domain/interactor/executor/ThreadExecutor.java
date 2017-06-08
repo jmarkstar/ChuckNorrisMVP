@@ -1,6 +1,7 @@
 package com.jmarkstar.core.domain.interactor.executor;
 
-import com.jmarkstar.core.domain.interactor.Interactor;
+import com.jmarkstar.core.domain.interactor.Action;
+
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import javax.inject.Inject;
@@ -24,9 +25,9 @@ public class ThreadExecutor implements Executor {
   }
 
   @Override
-  public void execute(final Interactor interactor) {
+  public void execute(final Action interactor) {
     if (null == interactor) {
-      throw new IllegalArgumentException("Interactor to execute can't be null");
+      throw new IllegalArgumentException("Action to execute can't be null");
     }
     mThreadPoolExecutor.submit(new Runnable() {
       @Override public void run() {

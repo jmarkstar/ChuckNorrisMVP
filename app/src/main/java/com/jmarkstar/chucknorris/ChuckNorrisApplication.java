@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.jmarkstar.chucknorris.di.ApplicationComponent;
 import com.jmarkstar.chucknorris.di.DaggerApplicationComponent;
-import com.jmarkstar.core.di.ApplicationModule;
+import com.jmarkstar.chucknorris.di.ApplicationModule;
 import com.jmarkstar.core.domain.repository.database.DatabaseModule;
 import com.jmarkstar.core.domain.repository.network.NetworkModule;
 import com.jmarkstar.core.util.Constants;

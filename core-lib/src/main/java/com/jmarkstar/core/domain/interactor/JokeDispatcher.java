@@ -8,5 +8,5 @@ import java.util.ArrayList;
  */
 public interface JokeDispatcher {
 
-    void fetchJokesInteractor(boolean refresh, int count, Interactor.Callback<ArrayList<JokeModel>> callback);
+    void fetchJokesInteractor(boolean refresh, int count, Action.Callback<ArrayList<JokeModel>> callback);
 }

@@ -1,4 +1,4 @@
-package com.jmarkstar.core.di;
+package com.jmarkstar.chucknorris.di;
 
 import android.app.Application;
 import android.content.Context;

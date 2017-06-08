@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:background="#bdbdbd"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:layout_margin="12dp"
+    <RelativeLayout
+        android:background="#FFFFFF"
+        android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_margin="8dp"
+        <ImageView android:id="@+id/iv_chuck_norris"
+            android:layout_centerVertical="true"
+            android:src="@drawable/chucknorris"
+            android:layout_width="130dp"
+            android:layout_height="100dp" />
+
+        <TextView android:id="@+id/tv_joke"
+            android:layout_toRightOf="@+id/iv_chuck_norris"
+            android:layout_toEndOf="@+id/iv_chuck_norris"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="Chuck Norris has two speeds: Walk and Kill."
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" />
 
-            <ImageView android:id="@+id/iv_chuck_norris"
-                android:src="@drawable/chucknorris"
-                android:layout_width="130dp"
-                android:layout_height="100dp" />
-
-            <TextView android:id="@+id/tv_joke"
-                android:layout_toRightOf="@+id/iv_chuck_norris"
-                android:layout_toEndOf="@+id/iv_chuck_norris"
-                android:layout_marginLeft="4dp"
-                android:layout_marginStart="4dp"
-                android:text="Chuck Norris has two speeds: Walk and Kill."
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:layout_centerVertical="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
 </LinearLayout>

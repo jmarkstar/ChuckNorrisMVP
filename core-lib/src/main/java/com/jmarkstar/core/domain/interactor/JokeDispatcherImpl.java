@@ -16,11 +16,11 @@ public class JokeDispatcherImpl implements JokeDispatcher {
 
     @Inject public JokeDispatcherImpl() {}
 
-    @Override public void fetchJokesInteractor(final boolean refresh, final int count, final Interactor.Callback<ArrayList<JokeModel>> callback) {
+    @Override public void fetchJokesInteractor(final boolean refresh, final int count, final Action.Callback<ArrayList<JokeModel>> callback) {
         if (null == callback) {
             throw new IllegalArgumentException("Callback can't be null");
         }
-        this.mExecutor.execute(new Interactor() {
+        this.mExecutor.execute(new Action() {
             @Override public void run() {
                 mJokeDataManager.getJokes(refresh, count, callback);
             }

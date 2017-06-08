@@ -1,6 +1,6 @@
 package com.jmarkstar.core.domain.repository.manager;
 
-import com.jmarkstar.core.domain.interactor.Interactor;
+import com.jmarkstar.core.domain.interactor.Action;
 import com.jmarkstar.core.domain.interactor.executor.MainThread;
 import javax.inject.Inject;
 
@@ -12,7 +12,7 @@ abstract class BaseDataManager {
 
     @Inject MainThread mMainThread;
 
-    void notifySuccess(final Object response, final Interactor.Callback callback) {
+    void notifySuccess(final Object response, final Action.Callback callback) {
         mMainThread.post(new Runnable() {
             @Override public void run() {
                 callback.onSuccess(response);
@@ -20,7 +20,7 @@ abstract class BaseDataManager {
         });
     }
 
-    void notifyError(final Throwable throwable, final Interactor.Callback callback) {
+    void notifyError(final Throwable throwable, final Action.Callback callback) {
         mMainThread.post(new Runnable() {
             @Override public void run() {
                 callback.onError(throwable);

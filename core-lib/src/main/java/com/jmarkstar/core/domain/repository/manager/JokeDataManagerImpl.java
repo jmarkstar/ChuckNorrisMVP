@@ -2,7 +2,7 @@ package com.jmarkstar.core.domain.repository.manager;
 
 import android.util.Log;
 import com.jmarkstar.core.R;
-import com.jmarkstar.core.domain.interactor.Interactor;
+import com.jmarkstar.core.domain.interactor.Action;
 import com.jmarkstar.core.domain.model.JokeModel;
 import com.jmarkstar.core.domain.repository.database.dao.JokeDao;
 import com.jmarkstar.core.domain.repository.network.IcndbService;
@@ -27,7 +27,7 @@ public class JokeDataManagerImpl extends BaseDataManager implements JokeDataMana
 
     @Inject public JokeDataManagerImpl() {}
 
-    @Override public void getJokes(final boolean refresh, final int count, final Interactor.Callback<ArrayList<JokeModel>> callback) {
+    @Override public void getJokes(final boolean refresh, final int count, final Action.Callback<ArrayList<JokeModel>> callback) {
         if(refresh){
             Log.v(TAG, "It´s from the server");
             Call<JokeResponse<ArrayList<JokeModel>>> responseCall = mIcndbService.getJokes(count);
@@ -56,11 +56,11 @@ public class JokeDataManagerImpl extends BaseDataManager implements JokeDataMana
     }
 
     @Override public void getJokesWithCustomName(Integer count, String firstName,
-                                                 String lastName, Interactor.Callback callback) {
+                                                 String lastName, Action.Callback callback) {
 
     }
 
-    @Override public void getJoke(Integer idJoke, final Interactor.Callback<JokeModel> callback) {
+    @Override public void getJoke(Integer idJoke, final Action.Callback<JokeModel> callback) {
         Call<JokeResponse<JokeModel>> responseCall = mIcndbService.getJoke(idJoke);
         responseCall.enqueue(new RemoteCallback<JokeResponse<JokeModel>>() {
             @Override public void onSuccess(JokeResponse<JokeModel> response) {
