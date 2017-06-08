@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.jmarkstar.chucknorris.R;
 import com.jmarkstar.chucknorris.ChuckNorrisApplication;
@@ -16,11 +18,13 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class JokesActivity extends AppCompatActivity implements JokeContract.JokeView {
 
     @Inject JokeContract.JokePresenter mJokePresenter;
 
+    @BindView(R.id.et_count) EditText mEtCount;
     @BindView(R.id.rv_jokes) RecyclerView mRvJokes;
 
     private JokeAdapter mJokeAdapter;
@@ -41,8 +45,12 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
         mRvJokes.setLayoutManager( new LinearLayoutManager(this));
 
         mJokeAdapter = new JokeAdapter(this);
-
         mJokePresenter.onGetRandomJokes(10);
+    }
+
+    @OnClick(R.id.btn_fetch) public void onFetch(){
+        Integer count = Integer.parseInt(mEtCount.getText().toString());
+        mJokePresenter.onGetRandomJokes(count);
     }
 
     @Override public void showProgress() {

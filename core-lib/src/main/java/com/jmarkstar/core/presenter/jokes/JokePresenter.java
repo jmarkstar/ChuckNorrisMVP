@@ -18,7 +18,7 @@ public class JokePresenter extends BaseContractor.BasePresenter<JokeContract.Jok
     @Inject public JokePresenter(){}
 
     @Override public void onGetRandomJokes(Integer count) {
-        mJokeDispatcher.fetchJokesInteractor(true, 10, new Action.Callback<ArrayList<JokeModel>>() {
+        mJokeDispatcher.fetchJokesInteractor(true, count, new Action.Callback<ArrayList<JokeModel>>() {
 
             @Override public void onSuccess(ArrayList<JokeModel> response) {
                 mView.showJokes(response);
