@@ -3,7 +3,14 @@
     <string name="number_jokes_limit">I\'m sorry, We just have %d jokes.</string>
     <string name="count_joke_singular">There is %d jokes.</string>
     <string name="count_joke_plural">There are %d jokes.</string>
+    <string name="action_search_hint">Count...</string>
     <string name="action_names">NAMES</string>
     <string name="action_random">RANDOM JOKE</string>
     <string name="action_get_jokes">GET JOKES</string>
+    <string name="customize_name_empty">Your Name is required.</string>
+    <string name="customize_lastname_empty">Your Last Name is required.</string>
+    <string name="customize_count_empty">The amount of jokes is required.</string>
+    <string name="customize_title">Customize the jokes ;)</string>
+    <string name="customize_fetch">Fetch</string>
+    <string name="customize_cancel">CANCEL</string>
 </resources>

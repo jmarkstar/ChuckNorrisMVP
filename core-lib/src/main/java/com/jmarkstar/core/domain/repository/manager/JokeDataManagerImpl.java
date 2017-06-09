@@ -73,8 +73,22 @@ public class JokeDataManagerImpl extends BaseDataManager implements JokeDataMana
     }
 
     @Override public void getJokesWithCustomName(Integer count, String firstName,
-                                                 String lastName, Action.Callback callback) {
+                                                 String lastName, final Action.Callback callback) {
+        Log.v(TAG, "It´s from the server");
+        Call<JokeResponse<ArrayList<JokeModel>>> responseCall = mIcndbService.getJokesWithCustomName(count, firstName, lastName);
+        responseCall.enqueue(new RemoteCallback<JokeResponse<ArrayList<JokeModel>>>() {
+            @Override public void onSuccess(JokeResponse<ArrayList<JokeModel>> response) {
+                if(response.getType().equals(Constants.API_SUCCESS)){
+                    notifySuccess(response.getValue(), callback);
+                }else{
+                    notifyError(new ApiException(R.string.exception_get_jokes), callback);
+                }
+            }
 
+            @Override public void onFailed(Throwable throwable) {
+                notifyError(throwable, callback);
+            }
+        });
     }
 
     @Override public void getJoke(Integer idJoke, final Action.Callback<JokeModel> callback) {

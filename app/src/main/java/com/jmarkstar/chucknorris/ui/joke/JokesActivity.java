@@ -1,7 +1,11 @@
 package com.jmarkstar.chucknorris.ui.joke;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jmarkstar.chucknorris.R;
 import com.jmarkstar.chucknorris.ChuckNorrisApplication;
 import com.jmarkstar.core.domain.model.JokeModel;
@@ -67,6 +75,7 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
         getMenuInflater().inflate(R.menu.activity_jokes_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         mSvSearch = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSvSearch.setQueryHint(getString(R.string.action_search_hint));
         mSvSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override public boolean onQueryTextSubmit(String query) {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -93,8 +102,8 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_put_name :
-
+            case R.id.action_cutomize_jokes :
+                openCustomizeJokesDialog();
                 return true;
             case R.id.action_random:
 
@@ -139,5 +148,59 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
         }else{
             showErrorMessage(String.format(getString(R.string.number_jokes_limit), numberOfJokes));
         }
+    }
+
+    private void getCustomJokes(View view ){
+        EditText etName = (EditText)view.findViewById(R.id.et_name);
+        EditText etLastName = (EditText)view.findViewById(R.id.et_lastname);
+        EditText etCount = (EditText)view.findViewById(R.id.et_count);
+
+        String name = etName.getText().toString();
+        String lastname = etLastName.getText().toString();
+        Integer count = Integer.parseInt(etCount.getText().toString());
+
+        if(validateFieldsForCustomJokes(name, lastname, count)){
+            mJokeAdapter.addList(null);
+            mJokeAdapter.notifyDataSetChanged();
+            mJokePresenter.onGetRandomJokesWithCustomName(count, name, lastname);
+        }
+    }
+
+    private void openCustomizeJokesDialog(){
+        Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_person_pin);
+        DrawableCompat.setTint(icon, ContextCompat.getColor(this,R.color.colorAccent));
+        new MaterialDialog.Builder(this)
+            .title(R.string.customize_title)
+            .icon(icon)
+            .autoDismiss(false)
+            .customView(R.layout.dialog_jokes_custom_name, false)
+            .positiveText(R.string.customize_fetch)
+            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                @Override public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    View view = dialog.getCustomView();
+                    getCustomJokes(view);
+                }
+            })
+            .negativeText(R.string.customize_cancel)
+            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                @Override public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    dialog.dismiss();
+                }
+            })
+            .show();
+    }
+
+    private boolean validateFieldsForCustomJokes(String name, String lastName, Integer count){
+        if(name.isEmpty()){
+            showErrorMessage(R.string.customize_name_empty);
+            return false;
+        }else if(lastName.isEmpty()){
+            showErrorMessage(R.string.customize_lastname_empty);
+            return false;
+        }else if(count!=null && count<1){
+            showErrorMessage(R.string.customize_count_empty);
+            return false;
+        }
+        return true;
     }
 }

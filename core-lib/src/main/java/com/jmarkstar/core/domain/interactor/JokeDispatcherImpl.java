@@ -18,7 +18,20 @@ public class JokeDispatcherImpl implements JokeDispatcher {
 
     @Inject public JokeDispatcherImpl() {}
 
-    @Override public void fetchJokesInteractor(final boolean refresh, final int count, final Action.Callback<ArrayList<JokeModel>> callback) {
+    @Override public void fetchJokesInteractor(final int count, final String name,
+                       final String lastname, final Action.Callback<ArrayList<JokeModel>> callback) {
+        if (null == callback) {
+            throw new CallbackNullPointerException(R.string.exception_callback_null);
+        }
+        this.mExecutor.execute(new Action() {
+            @Override public void run() {
+                mJokeDataManager.getJokesWithCustomName(count, name, lastname, callback);
+            }
+        });
+    }
+
+    @Override public void fetchJokesInteractor(final boolean refresh, final int count,
+                                               final Action.Callback<ArrayList<JokeModel>> callback) {
         if (null == callback) {
             throw new CallbackNullPointerException(R.string.exception_callback_null);
         }

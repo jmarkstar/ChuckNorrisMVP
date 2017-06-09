@@ -8,7 +8,7 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 
-    <item android:id="@+id/action_put_name"
+    <item android:id="@+id/action_cutomize_jokes"
         android:icon="@drawable/ic_person_pin"
         android:title="@string/action_names"
         app:showAsAction="always" />

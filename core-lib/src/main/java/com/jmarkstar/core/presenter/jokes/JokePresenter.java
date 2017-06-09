@@ -33,7 +33,17 @@ public class JokePresenter extends BaseContractor.BasePresenter<JokeContract.Jok
     }
 
     @Override public void onGetRandomJokesWithCustomName(Integer count, String name, String lastName) {
+        mView.showProgress();
+        mJokeDispatcher.fetchJokesInteractor(count, name, lastName, new Action.Callback<ArrayList<JokeModel>>() {
+            @Override public void onSuccess(ArrayList<JokeModel> response) {
+                mView.hideProgress();
+                mView.showJokes(response);
+            }
 
+            @Override public void onError(Throwable ex) {
+                errorHandler(ex);
+            }
+        });
     }
 
     @Override public void onGetSpecificJoke(Integer idJoke) {

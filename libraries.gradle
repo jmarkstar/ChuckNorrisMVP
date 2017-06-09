@@ -29,7 +29,7 @@ ext {
 
     timberVersion = "4.3.1"
 
-    materialDialogVersion = "0.9.3.0"
+    materialDialogVersion = "0.9.4.5"
     customCalendarViewVersion = "v1.1"
 
     //json

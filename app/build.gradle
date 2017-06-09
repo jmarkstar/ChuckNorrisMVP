@@ -33,6 +33,9 @@ dependencies {
     compile rootProject.ext.libraries.cardView
     compile rootProject.ext.libraries.androidAnnotations
 
+    compile rootProject.ext.libraries.materialDialogCore
+    compile rootProject.ext.libraries.materialDialogCommons
+
     compile rootProject.ext.libraries.dagger
     annotationProcessor rootProject.ext.libraries.daggerCompiler
 
