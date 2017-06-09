@@ -22,11 +22,16 @@ import com.jmarkstar.chucknorris.ChuckNorrisApplication;
 import com.jmarkstar.core.domain.model.JokeModel;
 import com.jmarkstar.core.presenter.jokes.JokeContract;
 import com.jmarkstar.core.presenter.jokes.JokeModule;
+import com.jmarkstar.core.util.Constants;
+
 import java.util.ArrayList;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ *  @author jmarkstar
+* */
 public class JokesActivity extends AppCompatActivity implements JokeContract.JokeView {
 
     @Inject JokeContract.JokePresenter mJokePresenter;
@@ -129,6 +134,7 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
     private void getJokes(Integer count){
         if(count <= numberOfJokes){
             mJokeAdapter.addList(null);
+            mJokeAdapter.notifyDataSetChanged();
             mJokePresenter.onGetRandomJokes(count);
         }else{
             showErrorMessage(String.format(getString(R.string.number_jokes_limit), numberOfJokes));
