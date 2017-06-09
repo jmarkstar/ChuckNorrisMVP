@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jmarkstar.chucknorris.R;
@@ -30,8 +29,6 @@ import com.jmarkstar.chucknorris.ChuckNorrisApplication;
 import com.jmarkstar.core.domain.model.JokeModel;
 import com.jmarkstar.core.presenter.jokes.JokeContract;
 import com.jmarkstar.core.presenter.jokes.JokeModule;
-import com.jmarkstar.core.util.Constants;
-
 import java.util.ArrayList;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -132,6 +129,11 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
         Log.v("JokesActivity", "jokes size = "+jokes.size());
         mJokeAdapter.addList(jokes);
         mRvJokes.setAdapter(mJokeAdapter);
+        if (jokes.size() > 1) {
+            mTvCount.setText(String.format(getString(R.string.count_joke_plural), jokes.size()));
+        }else{
+            mTvCount.setText(String.format(getString(R.string.count_joke_singular), jokes.size()));
+        }
     }
 
     @Override public void getNumberOfJokes(Integer numberOfJokes) {
