@@ -4,15 +4,18 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SearchViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,6 +76,7 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
         MenuItem searchItem = menu.findItem(R.id.action_search);
         mSvSearch = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSvSearch.setQueryHint(getString(R.string.action_search_hint));
+        mSvSearch.setInputType(InputType.TYPE_CLASS_NUMBER);
         mSvSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override public boolean onQueryTextSubmit(String query) {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -169,10 +173,11 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
     }
 
     private void openCustomizeJokesDialog(){
-        Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_person_pin);
-        DrawableCompat.setTint(icon, ContextCompat.getColor(this,R.color.colorAccent));
+        Drawable icon = VectorDrawableCompat.create(getResources(), R.drawable.ic_person_pin, getTheme());
+        DrawableCompat.setTint(icon, ContextCompat.getColor(this,R.color.colorPrimary));
         new MaterialDialog.Builder(this)
             .title(R.string.customize_title)
+            .titleColor(ContextCompat.getColor(this, R.color.colorPrimary))
             .icon(icon)
             .autoDismiss(false)
             .customView(R.layout.dialog_jokes_custom_name, false)
@@ -180,6 +185,7 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
             .onPositive(new MaterialDialog.SingleButtonCallback() {
                 @Override public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                     View view = dialog.getCustomView();
+                    dialog.dismiss();
                     getCustomJokes(view);
                 }
             })
