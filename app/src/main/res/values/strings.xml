@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Chuck Norris Jokes</string>
     <string name="number_jokes_limit">I\'m sorry, We just have %d jokes.</string>
+    <string name="count_joke_singular">There is %d jokes.</string>
+    <string name="count_joke_plural">There are %d jokes.</string>
     <string name="action_names">NAMES</string>
     <string name="action_random">RANDOM JOKE</string>
+    <string name="action_get_jokes">GET JOKES</string>
 </resources>

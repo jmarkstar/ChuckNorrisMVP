@@ -39,7 +39,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.VHJoke> {
 
     @Override public void onBindViewHolder(VHJoke holder, int position) {
         JokeModel joke = jokes.get(position);
-        holder.tvJoke.setText(joke.getJoke().replace("%quot;","\""));
+        holder.tvJoke.setText(joke.getJoke().replace("&quot;","\""));
 
         int random = new Random().nextInt(IMAGES.length);
         Drawable icon = ContextCompat.getDrawable(context, IMAGES[random]);

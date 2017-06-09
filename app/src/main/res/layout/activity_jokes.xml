@@ -5,28 +5,17 @@
     android:layout_height="match_parent"
     tools:context="com.jmarkstar.chucknorris.ui.joke.JokesActivity">
 
-    <RelativeLayout
-        android:id="@+id/rl_count"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp">
-
-        <EditText android:id="@+id/et_count"
-            android:hint="Count"
-            android:maxLines="1"
-            android:inputType="number"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionSearch"/>
-
-    </RelativeLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_jokes"
-        android:layout_below="@+id/rl_count"
+        android:layout_above="@+id/tv_count"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <TextView android:id="@+id/tv_count"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
 
     <ProgressBar android:id="@+id/pg_loading"
         android:visibility="gone"

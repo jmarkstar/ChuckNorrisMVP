@@ -2,19 +2,18 @@ package com.jmarkstar.chucknorris.ui.joke;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,10 +31,11 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
 
     @Inject JokeContract.JokePresenter mJokePresenter;
 
-    @BindView(R.id.et_count) EditText mEtCount;
     @BindView(R.id.rv_jokes) RecyclerView mRvJokes;
     @BindView(R.id.pg_loading) ProgressBar mPgLoading;
+    @BindView(R.id.tv_count) TextView mTvCount;
 
+    private SearchView mSvSearch;
     private JokeAdapter mJokeAdapter;
     private Integer numberOfJokes; //maximum
 
@@ -51,23 +51,6 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
             .build()
             .inject(this);
 
-        mEtCount.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    mJokeAdapter.addList(null);
-                    if(numberOfJokes != null){
-                        getJokes();
-                    }else{
-                        mJokePresenter.onGetNumberOfJokes();
-                    }
-                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    return true;
-                }
-                return false;
-            }
-        });
-
         mRvJokes.setLayoutManager( new LinearLayoutManager(this));
         mRvJokes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
@@ -77,6 +60,29 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_jokes_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        mSvSearch = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSvSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String query) {
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                Integer count = Integer.parseInt(query);
+                callSearch(count);
+                return true;
+            }
+
+            @Override public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+            private void callSearch(Integer count){
+                    if(numberOfJokes != null){
+                        getJokes(count);
+                    }else{
+                        mJokePresenter.onGetNumberOfJokes();
+                    }
+            }
+        });
         return true;
     }
 
@@ -116,12 +122,13 @@ public class JokesActivity extends AppCompatActivity implements JokeContract.Jok
 
     @Override public void getNumberOfJokes(Integer numberOfJokes) {
         this.numberOfJokes = numberOfJokes;
-        getJokes();
+        Integer count  = Integer.parseInt(mSvSearch.getQuery().toString());
+        getJokes(count);
     }
 
-    private void getJokes(){
-        Integer count = Integer.parseInt(mEtCount.getText().toString());
+    private void getJokes(Integer count){
         if(count <= numberOfJokes){
+            mJokeAdapter.addList(null);
             mJokePresenter.onGetRandomJokes(count);
         }else{
             showErrorMessage(String.format(getString(R.string.number_jokes_limit), numberOfJokes));
